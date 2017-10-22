@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:whitodo_csharp"
         mc:Ignorable="d"
-        Title="WhiToDo" Height="350" Width="525" Icon="pack://siteoforigin:,,,/whitodo.png">
+        Title="WhiToDo" Height="350" Width="525" Icon="whitodo.ico">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
     </Grid>
 </Window>

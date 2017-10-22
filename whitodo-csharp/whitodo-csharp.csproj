@@ -97,5 +97,8 @@
   <ItemGroup>
     <None Include="whitodo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="whitodo.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
