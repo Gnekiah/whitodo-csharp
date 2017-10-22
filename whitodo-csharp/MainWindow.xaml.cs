@@ -20,6 +20,8 @@ namespace whitodo_csharp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Point mouseOffset;
+
         public bool InitWhitodo()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -55,6 +57,21 @@ namespace whitodo_csharp
         private void TextBox_Initialized(object sender, EventArgs e)
         {
 
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mouseOffset = e.GetPosition(this);
+        }
+
+        private void Image_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point mousePos = e.GetPosition(this);
+                this.Left += (mousePos.X - mouseOffset.X);
+                this.Top += (mousePos.Y - mouseOffset.Y);
+            }
         }
     }
 }
