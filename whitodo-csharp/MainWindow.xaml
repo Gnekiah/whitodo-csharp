@@ -5,12 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:whitodo_csharp"
         mc:Ignorable="d"
-        Title="WhiToDo" Height="350" Width="525" Icon="whitodo.ico" WindowStyle="None" Opacity="0.5">
-    <Grid>
+        Title="WhiToDo" Height="400" Icon="whitodo.ico" Visibility="Visible" Background="{x:Null}" Foreground="{x:Null}" AllowsTransparency="True" WindowStyle="None" Width="600">
+    <Grid Margin="0" HorizontalAlignment="Right" Width="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="104*"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="495"/>
         </Grid.ColumnDefinitions>
+        <Border BorderThickness="0" HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="600" Grid.RowSpan="2" Background="White" Grid.ColumnSpan="3" Opacity="0.1"/>
+        <Border BorderThickness="0" Margin="18" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="White" Opacity="0.25" Padding="0"/>
+        <TextBox HorizontalAlignment="Right" Height="288" Margin="0,45,65,0" TextWrapping="Wrap" Text="TextBox&#xD;&#xA;efwfwewewewewef发热发热解封&#xD;&#xA;了忽略了看trek" VerticalAlignment="Top" Width="389" Grid.RowSpan="2" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FFAEFF00" Foreground="White" SelectionBrush="#FFFFD157" BorderThickness="0" Grid.Column="2"/>
 
     </Grid>
 </Window>

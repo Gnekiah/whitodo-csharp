@@ -46,5 +46,15 @@ namespace whitodo_csharp
             InitWhitodo();
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_Initialized(object sender, EventArgs e)
+        {
+
+        }
     }
 }
