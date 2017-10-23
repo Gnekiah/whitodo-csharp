@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Forms;
 
 namespace whitodo_csharp
 {
@@ -21,6 +22,8 @@ namespace whitodo_csharp
     public partial class MainWindow : Window
     {
         private Point mouseOffset;
+        private NotifyIcon notifyIcon;
+
 
         public bool InitWhitodo()
         {
@@ -43,10 +46,36 @@ namespace whitodo_csharp
             return true;
         }
 
+        public void AddNotifyIcon()
+        {
+            if (notifyIcon != null)
+            {
+                return;
+            }
+            notifyIcon = new NotifyIcon
+            {
+                Icon = new System.Drawing.Icon(),
+                Text = "WhiToDo"
+            };
+            notifyIcon.Visible = true;
+
+            System.Windows.Forms.ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
+            System.Windows.Forms.MenuItem openMainWindow = new System.Windows.Forms.MenuItem();
+            System.Windows.Forms.MenuItem close = new System.Windows.Forms.MenuItem();
+            openMainWindow.Text = "打开控制栏";
+            close.Text = "退出";
+            openMainWindow.Click += new EventHandler(delegate { this.Close(); });
+            notifyMenu.MenuItems.Add(openMainWindow);
+            notifyMenu.MenuItems.Add(close);
+
+            notifyIcon.ContextMenu = notifyMenu;
+        }
+
         public MainWindow()
         {
             InitWhitodo();
             InitializeComponent();
+            AddNotifyIcon();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,12 +88,12 @@ namespace whitodo_csharp
 
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseOffset = e.GetPosition(this);
         }
 
-        private void Image_MouseMove(object sender, MouseEventArgs e)
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
