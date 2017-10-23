@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:whitodo_csharp"
         mc:Ignorable="d"
+<<<<<<< HEAD
         Title="WhiToDo" Height="457.833" Icon="whitodo.ico" Visibility="Visible" Background="{x:Null}" Foreground="{x:Null}" Width="600" MouseDown="Window_MouseDown" MouseMove="Window_MouseMove" AllowDrop="True" BorderThickness="0" WindowStyle="None">
     <Grid Margin="0" Width="600">
         <Grid.RowDefinitions>
@@ -34,6 +35,14 @@
             </Grid>
         </Border>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="29" Margin="564,421,0,0" Stroke="Black" VerticalAlignment="Top" Width="36" Cursor="SizeNWSE" MouseDown="Rectangle_MouseDown" MouseMove="Rectangle_MouseMove"/>
+=======
+        Title="WhiToDo" Height="350" Width="525" Icon="whitodo.ico" WindowStyle="None" Opacity="0.5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+>>>>>>> parent of a8e36c3... backup for usable opacity window
 
     </Grid>
 </Window>

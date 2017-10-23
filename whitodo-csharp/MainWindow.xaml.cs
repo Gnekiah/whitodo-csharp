@@ -48,6 +48,7 @@ namespace whitodo_csharp
             InitWhitodo();
             InitializeComponent();
         }
+<<<<<<< HEAD
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -98,5 +99,7 @@ namespace whitodo_csharp
                 this.Height += (mousePos.Y - mouseOffset.Y);
             }
         }
+=======
+>>>>>>> parent of a8e36c3... backup for usable opacity window
     }
 }
