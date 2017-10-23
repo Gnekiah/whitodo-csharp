@@ -13,11 +13,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Border BorderThickness="0" Height="83" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" Opacity="0.15"/>
+
         <Border BorderThickness="0" Background="White" Opacity="0.1" Margin="0,104,0,0"/>
         <Border BorderThickness="0" Margin="18,126,24,18" Background="White" Opacity="0.25" Padding="0"/>
-        <TextBox Margin="40,150,44,40" TextWrapping="Wrap" Text="TextBox&#xD;&#xA;efwfwewewewewef发热发热解封&#xD;&#xA;了忽略了看trek" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FFAEFF00" Foreground="White" SelectionBrush="#FFFFD157" BorderThickness="0"/>
-        <Image Margin="0,1,0,425" Source="whitodo.ico" MouseDown="Image_MouseDown" MouseMove="Image_MouseMove"/>
-        <RichTextBox HorizontalAlignment="Left" Height="213" Margin="274,132,0,0" VerticalAlignment="Top" Width="218">
+        <Image Margin="284,25,284,0" Source="whitodo.ico" MouseDown="Image_MouseDown" MouseMove="Image_MouseMove" Width="32" Height="32" VerticalAlignment="Top"/>
+        <RichTextBox HorizontalAlignment="Left" Height="274" Margin="40,148,0,0" VerticalAlignment="Top" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FF4DB0FF" FontSize="18">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
