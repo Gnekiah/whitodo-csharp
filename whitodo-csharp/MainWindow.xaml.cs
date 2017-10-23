@@ -59,18 +59,43 @@ namespace whitodo_csharp
 
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseOffset = e.GetPosition(this);
         }
 
-        private void Image_MouseMove(object sender, MouseEventArgs e)
+        private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point mousePos = e.GetPosition(this);
                 this.Left += (mousePos.X - mouseOffset.X);
                 this.Top += (mousePos.Y - mouseOffset.Y);
+            }
+        }
+
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mouseOffset = e.GetPosition(this);
+        }
+
+        private void Rectangle_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point mousePos = e.GetPosition(this);
+                this.Width += (mousePos.X - mouseOffset.X);
+                this.Height += (mousePos.Y - mouseOffset.Y);
             }
         }
     }
