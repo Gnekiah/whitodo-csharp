@@ -89,12 +89,154 @@ namespace whitodo_csharp
 
         private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            return;
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Point mousePos = e.GetPosition(this);
                 this.Left += (mousePos.X - mouseOffset.X);
                 this.Top += (mousePos.Y - mouseOffset.Y);
             }
+        }
+
+        private void RedButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, RedButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void BlueButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, BlueButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void GreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, GreenButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void YellowButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, YellowButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void WhiteButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, WhiteButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void BlackButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.ForegroundProperty, BlackButton.Background);
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void BoldButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                bool isBold = false;
+                try
+                {
+                    FontWeight fw = (FontWeight)text.GetPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty);
+                    if (fw == FontWeights.Bold)
+                    {
+                        isBold = true;
+                    }
+                }
+                catch (Exception) { }
+                if (isBold)
+                {
+                    text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty, FontWeights.Normal);
+                }
+                else
+                {
+                    text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty, FontWeights.Bold);
+                }
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void ItalicButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                bool isItalic = false;
+                try
+                {
+                    FontStyle fs = (FontStyle)text.GetPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty);
+                    if (fs == FontStyles.Italic)
+                    {
+                        isItalic = true;
+                    }
+                }
+                catch (Exception) { }
+                if (isItalic)
+                {
+                    text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty, FontStyles.Normal);
+                }
+                else
+                {
+                    text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty, FontStyles.Italic);
+                }
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void UnderLineButton_Click(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                bool isUnderline = false;
+                try
+                {
+                    TextDecorationCollection ul = (TextDecorationCollection)text.GetPropertyValue(TextBlock.TextDecorationsProperty);
+                    if (ul == TextDecorations.Underline)
+                    {
+                        isUnderline = true;
+                    }
+                }
+                catch (Exception) { }
+                if (isUnderline)
+                {
+                    text.ApplyPropertyValue(TextBlock.TextDecorationsProperty, null);
+                }
+                else
+                {
+                    text.ApplyPropertyValue(TextBlock.TextDecorationsProperty, TextDecorations.Underline);
+                }
+            }
+            this.WhitodoText.Focus();
         }
     }
 }
