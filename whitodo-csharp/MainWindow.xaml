@@ -6,25 +6,39 @@
         xmlns:local="clr-namespace:whitodo_csharp"
         mc:Ignorable="d"
 <<<<<<< HEAD
+<<<<<<< HEAD
         Title="WhiToDo" Height="457.833" Icon="whitodo.ico" Visibility="Visible" Background="{x:Null}" Foreground="{x:Null}" Width="600" MouseDown="Window_MouseDown" MouseMove="Window_MouseMove" AllowDrop="True" BorderThickness="0" WindowStyle="None">
     <Grid Margin="0" Width="600">
+=======
+        Title="WhiToDo" Height="457.833" Icon="whitodo.ico" Visibility="Visible" Background="{x:Null}" Foreground="{x:Null}" AllowsTransparency="True" WindowStyle="None" Width="600" MouseDown="Window_MouseDown" MouseMove="Window_MouseMove">
+    <Grid Margin="0" Width="600" MinWidth="600">
+>>>>>>> dev-resiable
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+<<<<<<< HEAD
         <Border x:Name="ControlPanelColor" BorderThickness="0" Height="99" Background="White" Opacity="0.1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="600"/>
 
         <Border x:Name="TextPanel" BorderThickness="0" Background="White" Opacity="0.1" Margin="0,104,0,0"/>
         <Border BorderThickness="0" Margin="18,126,24,18" Background="White" Opacity="0.25" Padding="0"/>
         <RichTextBox Margin="40,143,40,40" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FFDA6262" Foreground="White" SelectionBrush="#FF00FFD1" FontSize="18" BorderThickness="0">
+=======
+        <Border BorderThickness="0" Height="83" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" Opacity="0.15" Width="580" MinWidth="580" MinHeight="83" MaxWidth="580" MaxHeight="83" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+
+        <Border BorderThickness="0" Background="White" Opacity="0.1" Margin="0,104,0,0"/>
+        <Border BorderThickness="0" Margin="18,126,24,18" Background="White" Opacity="0.25" Padding="0"/>
+        <RichTextBox HorizontalAlignment="Left" Height="274" Margin="40,148,0,0" VerticalAlignment="Top" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FF4DB0FF" FontSize="18">
+>>>>>>> dev-resiable
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+<<<<<<< HEAD
         <Border x:Name="ControlPanel" BorderThickness="0" Height="81" VerticalAlignment="Top" Margin="10,10,10,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <Grid RenderTransformOrigin="0.5,0.5" Margin="10">
                 <Button Content="" Margin="10,10,518,19" Click="Button_Click" Padding="0" BorderThickness="0" Width="32" Height="32" BorderBrush="{x:Null}" Foreground="{x:Null}" RenderTransformOrigin="1.5,0.688">
@@ -43,6 +57,25 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 >>>>>>> parent of a8e36c3... backup for usable opacity window
+=======
+        <Canvas Height="66" Margin="18,18,18,0" VerticalAlignment="Top" Width="564" MinWidth="564" MaxWidth="564" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Button x:Name="BlueButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="39" Canvas.Top="21" Height="24" Foreground="{x:Null}" Background="#FF0074FF"/>
+            <Button x:Name="RedButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="10" Canvas.Top="21" Height="24" Background="Red" Foreground="{x:Null}"/>
+            <Image x:Name="WhitodoButton" Source="whitodo.ico" Width="24" Height="24" VerticalAlignment="Top" Canvas.Left="526" Canvas.Top="21"/>
+            <Button x:Name="GreenButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="68" Canvas.Top="21" Height="24" Foreground="{x:Null}" Background="#FF2EFF00"/>
+            <Button x:Name="YellowButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="97" Canvas.Top="21" Height="24" Foreground="{x:Null}" Background="Yellow"/>
+            <Button x:Name="WhiteButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="126" Canvas.Top="21" Height="24" Background="White" Foreground="{x:Null}"/>
+            <ComboBox x:Name="FontTypeButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Canvas.Left="197" Canvas.Top="21" Height="24"/>
+            <ComboBox x:Name="FontSizeButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="49" Canvas.Left="318" Canvas.Top="21" Height="24"/>
+            <Image x:Name="SettingButton" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="24" Source="setting.ico" Canvas.Left="487" Canvas.Top="21"/>
+            <Button x:Name="BlackButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="155" Canvas.Top="21" Height="24" Foreground="{x:Null}" Background="Black"/>
+            <Button x:Name="BoldButton" Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="384" Canvas.Top="21" Height="24" FontWeight="Bold" FontSize="16" FontFamily="Consolas"/>
+            <Button x:Name="ItalicButton" Content="I" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="413" Canvas.Top="21" FontStyle="Italic" FontSize="16" FontFamily="Consolas"/>
+            <Button x:Name="UnderLineButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="442" Canvas.Top="21" FontSize="16" FontFamily="Consolas">
+                <TextBlock TextDecorations="Underline">U</TextBlock>
+            </Button>
+        </Canvas>
+>>>>>>> dev-resiable
 
     </Grid>
 </Window>

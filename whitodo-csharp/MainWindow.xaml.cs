@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Forms;
 
 namespace whitodo_csharp
 {
@@ -21,6 +22,7 @@ namespace whitodo_csharp
     public partial class MainWindow : Window
     {
         private Point mouseOffset;
+
 
         public bool InitWhitodo()
         {
@@ -42,11 +44,32 @@ namespace whitodo_csharp
             
             return true;
         }
+        
+        public void AddNotifyMenu(NotifyIcon notifyIcon)
+        {
+            System.Windows.Forms.ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
+            System.Windows.Forms.MenuItem openMainWindow = new System.Windows.Forms.MenuItem();
+            System.Windows.Forms.MenuItem close = new System.Windows.Forms.MenuItem();
+
+            openMainWindow.Text = "打开控制栏";
+            close.Text = "退出";
+
+            openMainWindow.Click += new EventHandler(delegate {  });
+            close.Click += new EventHandler(delegate { this.Close(); });
+
+            notifyMenu.MenuItems.Add(openMainWindow);
+            notifyMenu.MenuItems.Add(close);
+            notifyIcon.ContextMenu = notifyMenu;
+        }
 
         public MainWindow()
         {
             InitWhitodo();
             InitializeComponent();
+            this.ShowInTaskbar = false;
+            FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
+            AddNotifyMenu(FuckNotify.GetNotifyIcon());
+
         }
 <<<<<<< HEAD
 
@@ -60,6 +83,7 @@ namespace whitodo_csharp
 
         }
 
+<<<<<<< HEAD
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -70,12 +94,18 @@ namespace whitodo_csharp
 
         }
 
+=======
+>>>>>>> dev-resiable
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseOffset = e.GetPosition(this);
         }
 
+<<<<<<< HEAD
         private void Window_MouseMove(object sender, MouseEventArgs e)
+=======
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+>>>>>>> dev-resiable
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
