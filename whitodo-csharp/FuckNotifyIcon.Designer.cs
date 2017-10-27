@@ -31,46 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FuckNotifyIcon));
             this.whitodoIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.whitodomenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openMainWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeMainWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.whitodomenu.SuspendLayout();
             // 
             // whitodoIcon
             // 
             this.whitodoIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("whitodoIcon.Icon")));
             this.whitodoIcon.Text = "WhiToDo";
             this.whitodoIcon.Visible = true;
-            this.whitodoIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.whitodo_MouseDoubleClick);
-            // 
-            // whitodomenu
-            // 
-            this.whitodomenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openMainWindow,
-            this.closeMainWindow});
-            this.whitodomenu.Name = "contextMenuStrip1";
-            this.whitodomenu.Size = new System.Drawing.Size(149, 48);
-            // 
-            // openMainWindow
-            // 
-            this.openMainWindow.Name = "openMainWindow";
-            this.openMainWindow.Size = new System.Drawing.Size(148, 22);
-            this.openMainWindow.Text = "打开控制界面";
-            // 
-            // closeMainWindow
-            // 
-            this.closeMainWindow.Name = "closeMainWindow";
-            this.closeMainWindow.Size = new System.Drawing.Size(148, 22);
-            this.closeMainWindow.Text = "退出";
-            this.whitodomenu.ResumeLayout(false);
 
         }
 
         #endregion
 
         private System.Windows.Forms.NotifyIcon whitodoIcon;
-        private System.Windows.Forms.ContextMenuStrip whitodomenu;
-        private System.Windows.Forms.ToolStripMenuItem openMainWindow;
-        private System.Windows.Forms.ToolStripMenuItem closeMainWindow;
     }
 }

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace whitodo_csharp
 {
@@ -13,18 +14,11 @@ namespace whitodo_csharp
         public FuckNotifyIcon()
         {
             InitializeComponent();
-            whitodoIcon.Visible = true;
         }
 
-        public FuckNotifyIcon(IContainer container)
+        public NotifyIcon GetNotifyIcon()
         {
-            container.Add(this);
-            InitializeComponent();
-        }
-
-        private void whitodo_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            
+            return this.whitodoIcon;
         }
     }
 }

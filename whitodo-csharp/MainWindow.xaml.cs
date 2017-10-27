@@ -22,7 +22,6 @@ namespace whitodo_csharp
     public partial class MainWindow : Window
     {
         private Point mouseOffset;
-        private NotifyIcon notifyIcon;
 
 
         public bool InitWhitodo()
@@ -45,26 +44,15 @@ namespace whitodo_csharp
             
             return true;
         }
-
-        public void AddNotifyIcon()
+        
+        public void AddNotifyMenu(NotifyIcon notifyIcon)
         {
-            if (notifyIcon != null)
-            {
-                return;
-            }
-            notifyIcon = new NotifyIcon
-            {
-                Icon = new System.Drawing.Icon(),
-                Text = "WhiToDo"
-            };
-            notifyIcon.Visible = true;
-
             System.Windows.Forms.ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
             System.Windows.Forms.MenuItem openMainWindow = new System.Windows.Forms.MenuItem();
             System.Windows.Forms.MenuItem close = new System.Windows.Forms.MenuItem();
             openMainWindow.Text = "打开控制栏";
             close.Text = "退出";
-            openMainWindow.Click += new EventHandler(delegate { this.Close(); });
+            close.Click += new EventHandler(delegate { this.Close(); });
             notifyMenu.MenuItems.Add(openMainWindow);
             notifyMenu.MenuItems.Add(close);
 
@@ -75,7 +63,9 @@ namespace whitodo_csharp
         {
             InitWhitodo();
             InitializeComponent();
-            AddNotifyIcon();
+            this.ShowInTaskbar = false;
+            FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
+            AddNotifyMenu(FuckNotify.GetNotifyIcon());
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
