@@ -176,10 +176,12 @@ namespace whitodo_csharp
                 if (isBold)
                 {
                     text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty, FontWeights.Normal);
+                    this.BoldButton.Background = Brushes.White;
                 }
                 else
                 {
                     text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty, FontWeights.Bold);
+                    this.BoldButton.Background = Brushes.LightPink;
                 }
             }
             this.WhitodoText.Focus();
@@ -203,10 +205,12 @@ namespace whitodo_csharp
                 if (isItalic)
                 {
                     text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty, FontStyles.Normal);
+                    this.ItalicButton.Background = Brushes.White;
                 }
                 else
                 {
                     text.ApplyPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty, FontStyles.Italic);
+                    this.ItalicButton.Background = Brushes.LightPink;
                 }
             }
             this.WhitodoText.Focus();
@@ -230,11 +234,55 @@ namespace whitodo_csharp
                 if (isUnderline)
                 {
                     text.ApplyPropertyValue(TextBlock.TextDecorationsProperty, null);
+                    this.UnderLineButton.Background = Brushes.White;
                 }
                 else
                 {
                     text.ApplyPropertyValue(TextBlock.TextDecorationsProperty, TextDecorations.Underline);
+                    this.UnderLineButton.Background = Brushes.LightPink;
                 }
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void WhitodoText_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                bool isBold = false;
+                bool isItalic = false;
+                bool isUnderline = false;
+                try
+                {
+                    TextDecorationCollection ul = (TextDecorationCollection)text.GetPropertyValue(TextBlock.TextDecorationsProperty);
+                    if (ul == TextDecorations.Underline)
+                    {
+                        isUnderline = true;
+                    }
+                }
+                catch (Exception) { }
+                try
+                {
+                    FontWeight fw = (FontWeight)text.GetPropertyValue(System.Windows.Controls.RichTextBox.FontWeightProperty);
+                    if (fw == FontWeights.Bold)
+                    {
+                        isBold = true;
+                    }
+                }
+                catch (Exception) { }
+                try
+                {
+                    FontStyle fs = (FontStyle)text.GetPropertyValue(System.Windows.Controls.RichTextBox.FontStyleProperty);
+                    if (fs == FontStyles.Italic)
+                    {
+                        isItalic = true;
+                    }
+                }
+                catch (Exception) { }
+                this.BoldButton.Background = isBold ? Brushes.LightPink : Brushes.White;
+                this.ItalicButton.Background = isItalic ? Brushes.LightPink : Brushes.White;
+                this.UnderLineButton.Background = isUnderline ? Brushes.LightPink : Brushes.White;
             }
             this.WhitodoText.Focus();
         }

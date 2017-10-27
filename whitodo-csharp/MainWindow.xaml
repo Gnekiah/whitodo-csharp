@@ -17,7 +17,7 @@
 
         <Border BorderThickness="0" Background="White" Opacity="0.1" Margin="0,104,0,0"/>
         <Border BorderThickness="0" Margin="18,126,24,18" Background="White" Opacity="0.25" Padding="0"/>
-        <RichTextBox x:Name="WhitodoText" HorizontalAlignment="Left" Height="274" Margin="40,148,0,0" VerticalAlignment="Top" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FF4DB0FF" FontSize="18">
+        <RichTextBox x:Name="WhitodoText" Height="274" Margin="39,148,43,36" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FFEBA8FF" FontSize="18" SelectionChanged="WhitodoText_SelectionChanged">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
@@ -35,9 +35,9 @@
             <ComboBox x:Name="FontSizeButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="49" Canvas.Left="318" Canvas.Top="21" Height="24"/>
             <Image x:Name="SettingButton" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="24" Source="setting.ico" Canvas.Left="487" Canvas.Top="21"/>
             <Button x:Name="BlackButton" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="155" Canvas.Top="21" Height="24" Foreground="{x:Null}" Background="Black" Click="BlackButton_Click"/>
-            <Button x:Name="BoldButton" Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="384" Canvas.Top="21" Height="24" FontWeight="Bold" FontSize="16" FontFamily="Consolas" Click="BoldButton_Click"/>
-            <Button x:Name="ItalicButton" Content="I" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="413" Canvas.Top="21" FontStyle="Italic" FontSize="16" FontFamily="Consolas" Click="ItalicButton_Click"/>
-            <Button x:Name="UnderLineButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="442" Canvas.Top="21" FontSize="16" FontFamily="Consolas" Click="UnderLineButton_Click">
+            <Button x:Name="BoldButton" Content="B" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Canvas.Left="384" Canvas.Top="21" Height="24" FontWeight="Bold" FontSize="16" FontFamily="Consolas" Click="BoldButton_Click" Background="White"/>
+            <Button x:Name="ItalicButton" Content="I" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="413" Canvas.Top="21" FontStyle="Italic" FontSize="16" FontFamily="Consolas" Click="ItalicButton_Click" Background="White"/>
+            <Button x:Name="UnderLineButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Height="24" Canvas.Left="442" Canvas.Top="21" FontSize="16" FontFamily="Consolas" Click="UnderLineButton_Click" Background="White">
                 <TextBlock TextDecorations="Underline">U</TextBlock>
             </Button>
         </Canvas>
