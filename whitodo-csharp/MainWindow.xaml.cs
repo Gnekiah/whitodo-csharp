@@ -50,12 +50,15 @@ namespace whitodo_csharp
             System.Windows.Forms.ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
             System.Windows.Forms.MenuItem openMainWindow = new System.Windows.Forms.MenuItem();
             System.Windows.Forms.MenuItem close = new System.Windows.Forms.MenuItem();
+
             openMainWindow.Text = "打开控制栏";
             close.Text = "退出";
+
+            openMainWindow.Click += new EventHandler(delegate {  });
             close.Click += new EventHandler(delegate { this.Close(); });
+
             notifyMenu.MenuItems.Add(openMainWindow);
             notifyMenu.MenuItems.Add(close);
-
             notifyIcon.ContextMenu = notifyMenu;
         }
 
@@ -66,6 +69,7 @@ namespace whitodo_csharp
             this.ShowInTaskbar = false;
             FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
             AddNotifyMenu(FuckNotify.GetNotifyIcon());
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
