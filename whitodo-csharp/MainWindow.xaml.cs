@@ -84,6 +84,7 @@ namespace whitodo_csharp
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -96,13 +97,19 @@ namespace whitodo_csharp
 
 =======
 >>>>>>> dev-resiable
+=======
+>>>>>>> dev-resiable
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseOffset = e.GetPosition(this);
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         private void Window_MouseMove(object sender, MouseEventArgs e)
+=======
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+>>>>>>> dev-resiable
 =======
         private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
 >>>>>>> dev-resiable

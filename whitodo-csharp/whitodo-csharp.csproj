@@ -114,10 +114,14 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <None Include="Resources\setting.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\whitodo.ico" />
+=======
+    <Resource Include="setting.ico" />
+>>>>>>> dev-resiable
 =======
     <Resource Include="setting.ico" />
 >>>>>>> dev-resiable
