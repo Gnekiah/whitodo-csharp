@@ -72,16 +72,6 @@ namespace whitodo_csharp
 
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_Initialized(object sender, EventArgs e)
-        {
-
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mouseOffset = e.GetPosition(this);
@@ -285,6 +275,148 @@ namespace whitodo_csharp
                 this.UnderLineButton.Background = isUnderline ? Brushes.LightPink : Brushes.White;
             }
             this.WhitodoText.Focus();
+        }
+
+        private void FontSizeButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            int[] fontsize = {11,12,14,16,18,20,22,24,26,28,32,36,40,48,56,64,72};
+            foreach (int i in fontsize)
+            {
+                FontSizeButton.Items.Add(i.ToString());
+            }
+        }
+
+        private void FontTypeButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            LinkedList<string> fontnames = new LinkedList<string>();
+            foreach (FontFamily font in Fonts.SystemFontFamilies)
+            {
+                LanguageSpecificStringDictionary fontname = font.FamilyNames;
+                string _fontname = null;
+                if (fontname.ContainsKey(System.Windows.Markup.XmlLanguage.GetLanguage("zh-cn")) &&
+                    fontname.TryGetValue(System.Windows.Markup.XmlLanguage.GetLanguage("zh-cn"), out _fontname))
+                {
+                    fontnames.AddLast(_fontname);
+                }
+                else
+                {
+                    FontTypeButton.Items.Add(font.Source);
+                }
+            }
+            foreach (string fontname in fontnames)
+            {
+                FontTypeButton.Items.Add(fontname);
+            }
+        }
+
+        private void FontTypeButton_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                try
+                {
+                    FontFamily font = new FontFamily(FontTypeButton.SelectedItem.ToString());
+                    text.ApplyPropertyValue(TextBlock.FontFamilyProperty, font);
+                }
+                catch (Exception) { }
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void FontSizeButton_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                try
+                {
+                    text.ApplyPropertyValue(TextBlock.FontSizeProperty, FontSizeButton.SelectedItem);
+                }
+                catch (Exception) { }
+            }
+            this.WhitodoText.Focus();
+        }
+
+        private void SettingButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ScaleTransform stf = new ScaleTransform();
+            stf.ScaleX = 2;
+            stf.ScaleY = 2;
+            SettingButton.RenderTransformOrigin = new Point(0.5, 0.5);
+            SettingButton.RenderTransform = stf;
+        }
+
+        private void SettingButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ScaleTransform stf = new ScaleTransform();
+            stf.ScaleX = 1.0;
+            stf.ScaleY = 1.0;
+            SettingButton.RenderTransformOrigin = new Point(0.5, 0.5);
+            SettingButton.RenderTransform = stf;
+        }
+
+        private void WhitodoButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ScaleTransform stf = new ScaleTransform();
+            stf.ScaleX = 2;
+            stf.ScaleY = 2;
+            WhitodoButton.RenderTransformOrigin = new Point(0.5, 0.5);
+            WhitodoButton.RenderTransform = stf;
+        }
+
+        private void WhitodoButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ScaleTransform stf = new ScaleTransform();
+            stf.ScaleX = 1.0;
+            stf.ScaleY = 1.0;
+            WhitodoButton.RenderTransformOrigin = new Point(0.5, 0.5);
+            WhitodoButton.RenderTransform = stf;
+        }
+
+        private void BigerButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* 设置增大行距 */
+            /*
+            TextPointer tp = this.WhitodoText.CaretPosition.GetLineStartPosition(0);
+            TextBlock tb = new TextBlock();
+            if (!text.IsEmpty)
+            {
+                try
+                {
+                    text.ApplyPropertyValue(TextBlock.LineHeightProperty, 12);
+                }
+                catch (Exception) { }
+            }
+            this.WhitodoText.Focus();
+            */
+        }
+
+        private void LowerButton_Click(object sender, RoutedEventArgs e)
+        {
+            /* 设置缩小行距 */
+            /*
+            TextSelection text = this.WhitodoText.Selection;
+            if (!text.IsEmpty)
+            {
+                try
+                {
+                    text.ApplyPropertyValue(TextBlock.LineHeightProperty, 12);
+                }
+                catch (Exception) { }
+            }
+            this.WhitodoText.Focus();
+            */
+        }
+
+        private void SettingButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void WhitodoButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
