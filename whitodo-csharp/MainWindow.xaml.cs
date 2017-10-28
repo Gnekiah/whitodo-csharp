@@ -22,6 +22,10 @@ namespace whitodo_csharp
     public partial class MainWindow : Window
     {
         private Point mouseOffset;
+        private Point startControlArea;
+        private Point endControlArea;
+        private Point startTextArea;
+        private Point endTextArea;
 
 
         public bool InitWhitodo()
@@ -54,12 +58,35 @@ namespace whitodo_csharp
             openMainWindow.Text = "打开控制栏";
             close.Text = "退出";
 
-            openMainWindow.Click += new EventHandler(delegate {  });
+            openMainWindow.Click += new EventHandler(delegate {
+                ControlPanelBackground.Visibility = Visibility.Visible;
+                ControlPanel.Visibility = Visibility.Visible;
+                WhitodoText.IsReadOnly = false;
+                WhitodoText.SelectionBrush = Brushes.LightPink;
+            });
             close.Click += new EventHandler(delegate { this.Close(); });
 
             notifyMenu.MenuItems.Add(openMainWindow);
             notifyMenu.MenuItems.Add(close);
             notifyIcon.ContextMenu = notifyMenu;
+        }
+
+        public void CalcRectArea()
+        {
+            startTextArea = WhitodoText.TranslatePoint(new Point(0, 0), this);
+            endTextArea.X = startTextArea.X + WhitodoText.Width;
+            endTextArea.Y = startTextArea.Y + WhitodoText.Height;
+            startControlArea = RedButton.TranslatePoint(new Point(0, 0), this);
+            endControlArea = WhitodoButton.TranslatePoint(new Point(0, 0), this);
+            endControlArea.X += WhitodoButton.Width;
+            endControlArea.Y += WhitodoButton.Height;
+            /* DEBUG INFO
+            string x = "startTextArea=" + startTextArea.X.ToString() + "," + startTextArea.Y.ToString();
+            x += "\nendTextArea=" + endTextArea.X.ToString() + "," + endTextArea.Y.ToString();
+            x += "\nstartControlArea=" + startControlArea.X.ToString() + "," + startControlArea.Y.ToString();
+            x += "\nendControlArea=" + endControlArea.X.ToString() + "," + endControlArea.Y.ToString();
+            System.Windows.MessageBox.Show(x);
+            */
         }
 
         public MainWindow()
@@ -69,23 +96,6 @@ namespace whitodo_csharp
             this.ShowInTaskbar = false;
             FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
             AddNotifyMenu(FuckNotify.GetNotifyIcon());
-
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            mouseOffset = e.GetPosition(this);
-        }
-
-        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            return;
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                Point mousePos = e.GetPosition(this);
-                this.Left += (mousePos.X - mouseOffset.X);
-                this.Top += (mousePos.Y - mouseOffset.Y);
-            }
         }
 
         private void RedButton_Click(object sender, RoutedEventArgs e)
@@ -416,7 +426,33 @@ namespace whitodo_csharp
 
         private void WhitodoButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            ControlPanelBackground.Visibility = Visibility.Hidden;
+            ControlPanel.Visibility = Visibility.Hidden;
+            WhitodoText.IsReadOnly = true;
+            WhitodoText.SelectionBrush = null;
+        }
 
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mouseOffset = e.GetPosition(this);
+            CalcRectArea();
+        }
+
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(this);
+            if ((mousePos.X > startTextArea.X && mousePos.Y > startTextArea.Y &&
+                mousePos.X < endTextArea.X && mousePos.Y < endTextArea.Y) || 
+                (mousePos.X > startControlArea.X && mousePos.Y > startControlArea.Y &&
+                mousePos.X < endControlArea.X && mousePos.Y < endControlArea.Y))
+            {
+                return;
+            }
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.Left += (mousePos.X - mouseOffset.X);
+                this.Top += (mousePos.Y - mouseOffset.Y);
+            }
         }
     }
 }
