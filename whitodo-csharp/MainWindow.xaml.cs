@@ -26,6 +26,7 @@ namespace whitodo_csharp
         private Point endControlArea;
         private Point startTextArea;
         private Point endTextArea;
+        public SettingsPDU spdu;
 
 
         public bool InitWhitodo()
@@ -45,10 +46,26 @@ namespace whitodo_csharp
 
             Global.cfgFilePath = Path.Combine(Global.mainDirPath, Global.cfgFileName);
             Global.txtFilePath = Path.Combine(Global.mainDirPath, Global.txtFileName);
-            
+
             return true;
         }
-        
+
+        public void HideControlPanel()
+        {
+            ControlPanelBackground.Visibility = Visibility.Hidden;
+            ControlPanel.Visibility = Visibility.Hidden;
+            WhitodoText.IsReadOnly = true;
+            WhitodoText.SelectionBrush = null;
+        }
+
+        public void ShowControlPanel()
+        {
+            ControlPanelBackground.Visibility = Visibility.Visible;
+            ControlPanel.Visibility = Visibility.Visible;
+            WhitodoText.IsReadOnly = false;
+            WhitodoText.SelectionBrush = Brushes.LightPink;
+        }
+
         public void AddNotifyMenu(NotifyIcon notifyIcon)
         {
             System.Windows.Forms.ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
@@ -58,12 +75,7 @@ namespace whitodo_csharp
             openMainWindow.Text = "打开控制栏";
             close.Text = "退出";
 
-            openMainWindow.Click += new EventHandler(delegate {
-                ControlPanelBackground.Visibility = Visibility.Visible;
-                ControlPanel.Visibility = Visibility.Visible;
-                WhitodoText.IsReadOnly = false;
-                WhitodoText.SelectionBrush = Brushes.LightPink;
-            });
+            openMainWindow.Click += new EventHandler(delegate { ShowControlPanel(); });
             close.Click += new EventHandler(delegate { this.Close(); });
 
             notifyMenu.MenuItems.Add(openMainWindow);
@@ -89,6 +101,16 @@ namespace whitodo_csharp
             */
         }
 
+        public void SetSPDU()
+        {
+            spdu = new SettingsPDU(TextPanelInnerBackground.Margin.Left - TextPanelOuterBackground.Margin.Left,
+                WhitodoText.Width, WhitodoText.Height,
+                TextPanelOuterBackground.Opacity, TextPanelInnerBackground.Opacity,
+                TextPanelOuterBackground.Background, TextPanelInnerBackground.Background,
+                RedButton.Background, BlueButton.Background, GreenButton.Background,
+                YellowButton.Background, WhiteButton.Background, BlackButton.Background);
+        }
+
         public MainWindow()
         {
             InitWhitodo();
@@ -96,6 +118,7 @@ namespace whitodo_csharp
             this.ShowInTaskbar = false;
             FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
             AddNotifyMenu(FuckNotify.GetNotifyIcon());
+            SetSPDU();
         }
 
         private void RedButton_Click(object sender, RoutedEventArgs e)
@@ -289,7 +312,7 @@ namespace whitodo_csharp
 
         private void FontSizeButton_Loaded(object sender, RoutedEventArgs e)
         {
-            int[] fontsize = {11,12,14,16,18,20,22,24,26,28,32,36,40,48,56,64,72};
+            int[] fontsize = { 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 32, 36, 40, 48, 56, 64, 72 };
             foreach (int i in fontsize)
             {
                 FontSizeButton.Items.Add(i.ToString());
@@ -418,18 +441,65 @@ namespace whitodo_csharp
             this.WhitodoText.Focus();
             */
         }
+        
+        public void DoSettings(SettingsPDU spdu)
+        {
+            switch (spdu.id)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    TextPanelOuterBackground.Opacity = spdu.outerTransparency;
+                    break;
+                case 5:
+                    TextPanelInnerBackground.Opacity = spdu.innerTransparency;
+                    break;
+                case 6:
+                    TextPanelOuterBackground.Background = spdu.outerBrush;
+                    break;
+                case 7:
+                    TextPanelInnerBackground.Background = spdu.innerBrush;
+                    break;
+                case 8:
+                    RedButton.Background = spdu.brush1;
+                    break;
+                case 9:
+                    BlueButton.Background = spdu.brush2;
+                    break;
+                case 10:
+                    GreenButton.Background = spdu.brush3;
+                    break;
+                case 11:
+                    YellowButton.Background = spdu.brush4;
+                    break;
+                case 12:
+                    WhiteButton.Background = spdu.brush5;
+                    break;
+                case 13:
+                    BlackButton.Background = spdu.brush6;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void SettingButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            SetSPDU();
+            SettingDialog settingDialog = new SettingDialog(DoSettings, spdu);
+            HideControlPanel();
+            settingDialog.ShowDialog();
+            ShowControlPanel();
+            CalcRectArea();
         }
 
         private void WhitodoButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ControlPanelBackground.Visibility = Visibility.Hidden;
-            ControlPanel.Visibility = Visibility.Hidden;
-            WhitodoText.IsReadOnly = true;
-            WhitodoText.SelectionBrush = null;
+            HideControlPanel();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

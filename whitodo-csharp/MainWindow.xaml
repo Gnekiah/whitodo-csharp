@@ -16,8 +16,8 @@
         <Border x:Name="ControlPanelBackground" BorderThickness="0" Height="83" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" Opacity="0.15" Width="580" MinWidth="580" MinHeight="83" MaxWidth="580" MaxHeight="83" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
 
         <Border x:Name="TextPanelOuterBackground" BorderThickness="0" Background="White" Opacity="0.1" Margin="0,104,0,0"/>
-        <Border x:Name="TextPanelInnerBackground" BorderThickness="0" Margin="18,126,24,18" Background="White" Opacity="0.25" Padding="0"/>
-        <RichTextBox x:Name="WhitodoText" Height="274" Margin="39,148,43,36" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FFEBA8FF" FontSize="18" SelectionChanged="WhitodoText_SelectionChanged" Block.LineHeight="6" BorderThickness="0">
+        <Border x:Name="TextPanelInnerBackground" BorderThickness="0" Margin="18,126,18,18" Background="White" Opacity="0.25" Padding="0"/>
+        <RichTextBox x:Name="WhitodoText" Height="274" Margin="39,149,39,39" Width="518" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="#FF17FF00" Foreground="White" SelectionBrush="#FFEBA8FF" FontSize="18" SelectionChanged="WhitodoText_SelectionChanged" Block.LineHeight="6" BorderThickness="0">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="RichTextBox"/>
