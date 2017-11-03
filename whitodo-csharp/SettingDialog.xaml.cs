@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace whitodo_csharp
 {
@@ -30,10 +31,6 @@ namespace whitodo_csharp
             spdu = _spdu;
             OuterWidth.Value = spdu.outerWidth;
             OuterWidthValue.Content = spdu.outerWidth;
-            InnerWidth.Value = spdu.innerWidth;
-            InnerWidthValue.Content = spdu.innerWidth;
-            InnerHeight.Value = spdu.innerHeight;
-            InnerHeightValue.Content = spdu.innerHeight;
             OuterTransparency.Value = spdu.outerTransparency;
             OuterTransparencyValue.Content = spdu.outerTransparency;
             InnerTransparency.Value = spdu.innerTransparency;
@@ -46,8 +43,6 @@ namespace whitodo_csharp
             Brush4.Background = spdu.brush4;
             Brush5.Background = spdu.brush5;
             Brush6.Background = spdu.brush6;
-            InnerWidth.Minimum = 100;
-            InnerHeight.Minimum = 100;
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
@@ -63,25 +58,9 @@ namespace whitodo_csharp
             doSettings.Invoke(spdu);
         }
 
-        private void InnerWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            spdu.id = 2;
-            InnerWidthValue.Content = InnerWidth.Value;
-            spdu.innerWidth = InnerWidth.Value;
-            doSettings.Invoke(spdu);
-        }    
-
-        private void InnerHeight_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            spdu.id = 3;
-            InnerHeightValue.Content = InnerHeight.Value;
-            spdu.innerHeight = InnerHeight.Value;
-            doSettings.Invoke(spdu);
-        }
-
         private void OuterTransparency_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            spdu.id = 4;
+            spdu.id = 2;
             OuterTransparencyValue.Content = OuterTransparency.Value;
             spdu.outerTransparency = OuterTransparency.Value;
             doSettings.Invoke(spdu);
@@ -89,9 +68,106 @@ namespace whitodo_csharp
 
         private void InnerTransparency_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            spdu.id = 5;
+            spdu.id = 3;
             InnerTransparencyValue.Content = InnerTransparency.Value;
             spdu.innerTransparency = InnerTransparency.Value;
+            doSettings.Invoke(spdu);
+        }
+
+        private Brush ChooseColor()
+        {
+            System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SolidColorBrush b = new SolidColorBrush();
+                Color c = new Color();
+                c.A = colorDialog.Color.A;
+                c.R = colorDialog.Color.R;
+                c.G = colorDialog.Color.G;
+                c.B = colorDialog.Color.B;
+                b.Color = c;
+                return b;
+            }
+            return null;
+        }
+
+        private void OuterBrush_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 4;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            OuterBrush.Background = b;
+            spdu.outerBrush = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void InnerBrush_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 5;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            InnerBrush.Background = b;
+            spdu.innerBrush = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush1_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 6;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush1.Background = b;
+            spdu.brush1 = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush2_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 7;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush2.Background = b;
+            spdu.brush2 = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush3_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 8;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush3.Background = b;
+            spdu.brush3 = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush4_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 9;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush4.Background = b;
+            spdu.brush4 = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush5_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 10;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush5.Background = b;
+            spdu.brush5 = b;
+            doSettings.Invoke(spdu);
+        }
+
+        private void Brush6_Click(object sender, RoutedEventArgs e)
+        {
+            spdu.id = 11;
+            Brush b = ChooseColor();
+            if (b == null) return;
+            Brush6.Background = b;
+            spdu.brush6 = b;
             doSettings.Invoke(spdu);
         }
     }

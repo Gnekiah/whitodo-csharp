@@ -12,8 +12,6 @@ namespace whitodo_csharp
     {
         public int id;
         public double outerWidth;
-        public double innerWidth;
-        public double innerHeight;
         public double outerTransparency;
         public double innerTransparency;
         public Brush outerBrush;
@@ -25,12 +23,10 @@ namespace whitodo_csharp
         public Brush brush5;
         public Brush brush6;
 
-        public SettingsPDU(double ow, double iw, double ih, double ot, double it, Brush ob, Brush ib,
+        public SettingsPDU(double ow, double ot, double it, Brush ob, Brush ib,
             Brush b1, Brush b2, Brush b3, Brush b4, Brush b5, Brush b6)
         {
             outerWidth = ow;
-            innerWidth = iw;
-            innerHeight = ih;
             outerTransparency = ot;
             innerTransparency = it;
             outerBrush = ob;
@@ -41,7 +37,6 @@ namespace whitodo_csharp
             brush4 = b4;
             brush5 = b5;
             brush6 = b6;
-            //MessageBox.Show(innerWidth.ToString());
         }
     }
 }

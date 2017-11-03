@@ -21,14 +21,14 @@ namespace whitodo_csharp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool canmove = true;
         private Point mouseOffset;
         private Point startControlArea;
         private Point endControlArea;
         private Point startTextArea;
         private Point endTextArea;
         public SettingsPDU spdu;
-
-
+        
         public bool InitWhitodo()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -56,6 +56,8 @@ namespace whitodo_csharp
             ControlPanel.Visibility = Visibility.Hidden;
             WhitodoText.IsReadOnly = true;
             WhitodoText.SelectionBrush = null;
+            this.ResizeMode = ResizeMode.NoResize;
+            canmove = false;
         }
 
         public void ShowControlPanel()
@@ -64,6 +66,8 @@ namespace whitodo_csharp
             ControlPanel.Visibility = Visibility.Visible;
             WhitodoText.IsReadOnly = false;
             WhitodoText.SelectionBrush = Brushes.LightPink;
+            this.ResizeMode = ResizeMode.CanResizeWithGrip;
+            canmove = true;
         }
 
         public void AddNotifyMenu(NotifyIcon notifyIcon)
@@ -104,7 +108,6 @@ namespace whitodo_csharp
         public void SetSPDU()
         {
             spdu = new SettingsPDU(TextPanelInnerBackground.Margin.Left - TextPanelOuterBackground.Margin.Left,
-                WhitodoText.Width, WhitodoText.Height,
                 TextPanelOuterBackground.Opacity, TextPanelInnerBackground.Opacity,
                 TextPanelOuterBackground.Background, TextPanelInnerBackground.Background,
                 RedButton.Background, BlueButton.Background, GreenButton.Background,
@@ -490,53 +493,33 @@ namespace whitodo_csharp
                     WhitodoText.Height = width;
                     break;
                 case 2:
-                    width = spdu.innerWidth + 40 + 2 * spdu.outerWidth;
-                    this.Width = width > 600 ? width : 600;
-                    TextPanelOuterBackground.Width = width;
-                    TextPanelInnerBackground.Width = spdu.innerWidth + 40;
-
-                    margin = TextPanelOuterBackground.Margin;
-                    margin.Left = 0;
-                    TextPanelOuterBackground.Margin = margin;
-
-                    margin = TextPanelInnerBackground.Margin;
-                    margin.Left = TextPanelOuterBackground.Margin.Left + spdu.outerWidth;
-                    TextPanelInnerBackground.Margin = margin;
-
-                    margin = WhitodoText.Margin;
-                    margin.Left = TextPanelInnerBackground.Margin.Left + 20;
-                    WhitodoText.Margin = margin;
-                    break;
-                case 3:
-                    break;
-                case 4:
                     TextPanelOuterBackground.Opacity = spdu.outerTransparency;
                     break;
-                case 5:
+                case 3:
                     TextPanelInnerBackground.Opacity = spdu.innerTransparency;
                     break;
-                case 6:
+                case 4:
                     TextPanelOuterBackground.Background = spdu.outerBrush;
                     break;
-                case 7:
+                case 5:
                     TextPanelInnerBackground.Background = spdu.innerBrush;
                     break;
-                case 8:
+                case 6:
                     RedButton.Background = spdu.brush1;
                     break;
-                case 9:
+                case 7:
                     BlueButton.Background = spdu.brush2;
                     break;
-                case 10:
+                case 8:
                     GreenButton.Background = spdu.brush3;
                     break;
-                case 11:
+                case 9:
                     YellowButton.Background = spdu.brush4;
                     break;
-                case 12:
+                case 10:
                     WhiteButton.Background = spdu.brush5;
                     break;
-                case 13:
+                case 11:
                     BlackButton.Background = spdu.brush6;
                     break;
                 default:
@@ -567,6 +550,7 @@ namespace whitodo_csharp
 
         private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            if (!canmove) return;
             Point mousePos = e.GetPosition(this);
             if ((mousePos.X > startTextArea.X && mousePos.Y > startTextArea.Y &&
                 mousePos.X < endTextArea.X && mousePos.Y < endTextArea.Y) || 
@@ -580,6 +564,40 @@ namespace whitodo_csharp
                 this.Left += (mousePos.X - mouseOffset.X);
                 this.Top += (mousePos.Y - mouseOffset.Y);
             }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double width = 0;
+            Thickness margin;
+            
+            margin = WindowGrid.Margin;
+            margin.Left = 0;
+            margin.Top = 0;
+            WindowGrid.Margin = margin;
+            WindowGrid.Width = this.Width;
+            WindowGrid.Height = this.Height;
+
+            margin = TextPanelOuterBackground.Margin;
+            margin.Left = 0;
+            margin.Top = 104;
+            TextPanelOuterBackground.Margin = margin;
+            TextPanelOuterBackground.Width = WindowGrid.Width;
+            TextPanelOuterBackground.Height = WindowGrid.Height - 104;
+
+            margin = TextPanelInnerBackground.Margin;
+            margin.Left = TextPanelOuterBackground.Margin.Left + spdu.outerWidth;
+            margin.Top = 122;
+            TextPanelInnerBackground.Margin = margin;
+            TextPanelInnerBackground.Width = TextPanelOuterBackground.Width - 2 * spdu.outerWidth;
+            TextPanelInnerBackground.Height = TextPanelOuterBackground.Height - 2 * spdu.outerWidth;
+
+            margin = WhitodoText.Margin;
+            margin.Left = TextPanelInnerBackground.Margin.Left + 20;
+            margin.Top = 142;
+            WhitodoText.Margin = margin;
+            WhitodoText.Width = TextPanelInnerBackground.Width - 40;
+            WhitodoText.Height = TextPanelInnerBackground.Height - 40;
         }
     }
 }
