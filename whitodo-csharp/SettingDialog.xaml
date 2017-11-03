@@ -1,0 +1,33 @@
+﻿<Window x:Class="whitodo_csharp.SettingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:whitodo_csharp"
+        mc:Ignorable="d"
+        Title="设置" Height="300" Width="494" ResizeMode="NoResize" Icon="setting.ico" MinWidth="494" MinHeight="374" MaxWidth="494" MaxHeight="374" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+    <Grid>
+        <Button x:Name="OKButton" Content="确定" Margin="0,0,10,14" TextOptions.TextFormattingMode="Display" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="OKButton_Click"/>
+        <Slider x:Name="OuterWidth" HorizontalAlignment="Left" Margin="93,29,0,0" VerticalAlignment="Top" Width="340" ValueChanged="OuterWidth_ValueChanged" Maximum="200" SmallChange="1"/>
+        <Label Content="外边框宽度" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="外边框透明度" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="文本框透明度" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="外边框颜色" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="文本框颜色" HorizontalAlignment="Left" Margin="185,191,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label Content="字体颜色预设" HorizontalAlignment="Left" Margin="10,236,0,0" Height="24" VerticalAlignment="Top"/>
+        <Slider x:Name="OuterTransparency" HorizontalAlignment="Left" Margin="93,74,0,0" VerticalAlignment="Top" Width="340" ValueChanged="OuterTransparency_ValueChanged" SmallChange="0.01" Maximum="1" LargeChange="0.1"/>
+        <Slider x:Name="InnerTransparency" HorizontalAlignment="Left" Margin="93,119,0,0" VerticalAlignment="Top" Width="340" ValueChanged="InnerTransparency_ValueChanged" Maximum="1" LargeChange="0.1"/>
+        <Button x:Name="OuterBrush" Content="Button" HorizontalAlignment="Left" Margin="105,191,0,0" VerticalAlignment="Top" Width="24" Height="24" Background="#FFDDDDDD" Foreground="{x:Null}" Click="OuterBrush_Click"/>
+        <Button x:Name="InnerBrush" Content="Button" HorizontalAlignment="Left" Margin="280,191,0,0" VerticalAlignment="Top" Width="24" Height="24" Background="#FFDDDDDD" Foreground="{x:Null}" Click="InnerBrush_Click"/>
+        <Button x:Name="Brush1" Content="Button" HorizontalAlignment="Left" Margin="105,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush1_Click"/>
+        <Button x:Name="Brush3" Content="Button" HorizontalAlignment="Left" Margin="175,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush3_Click"/>
+        <Button x:Name="Brush2" Content="Button" HorizontalAlignment="Left" Margin="140,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush2_Click"/>
+        <Button x:Name="Brush4" Content="Button" HorizontalAlignment="Left" Margin="210,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush4_Click"/>
+        <Button x:Name="Brush5" Content="Button" HorizontalAlignment="Left" Margin="245,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush5_Click"/>
+        <Button x:Name="Brush6" Content="Button" HorizontalAlignment="Left" Margin="280,236,0,0" Width="24" Background="#FFDDDDDD" Foreground="{x:Null}" Height="24" VerticalAlignment="Top" Click="Brush6_Click"/>
+        <Label x:Name="OuterWidthValue" Content="1000" HorizontalAlignment="Left" Margin="434,26,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label x:Name="OuterTransparencyValue" Content="1000" HorizontalAlignment="Left" Margin="434,71,0,0" VerticalAlignment="Top" Height="24"/>
+        <Label x:Name="InnerTransparencyValue" Content="1000" HorizontalAlignment="Left" Margin="434,116,0,0" VerticalAlignment="Top" Height="24"/>
+
+    </Grid>
+</Window>
