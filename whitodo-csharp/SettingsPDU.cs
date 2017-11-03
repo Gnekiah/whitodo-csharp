@@ -23,6 +23,21 @@ namespace whitodo_csharp
         public Brush brush5;
         public Brush brush6;
 
+        public SettingsPDU()
+        {
+            outerWidth = -1;
+            outerTransparency = -1;
+            innerTransparency = -1;
+            outerBrush = null;
+            innerBrush = null;
+            brush1 = null;
+            brush2 = null;
+            brush3 = null;
+            brush4 = null;
+            brush5 = null;
+            brush6 = null;
+        }
+
         public SettingsPDU(double ow, double ot, double it, Brush ob, Brush ib,
             Brush b1, Brush b2, Brush b3, Brush b4, Brush b5, Brush b6)
         {

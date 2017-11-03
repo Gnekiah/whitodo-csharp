@@ -27,10 +27,11 @@ namespace whitodo_csharp
         private Point endControlArea;
         private Point startTextArea;
         private Point endTextArea;
-        public SettingsPDU spdu;
+        public SettingsPDU spdu = new SettingsPDU();
         
-        public bool InitWhitodo()
+        public int InitWhitodo()
         {
+            int ret = 0x00;
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             Global.mainDirPath = Path.Combine(appDataPath, Global.mainDirName);
             if (!Directory.Exists(Global.mainDirPath))
@@ -47,7 +48,77 @@ namespace whitodo_csharp
             Global.cfgFilePath = Path.Combine(Global.mainDirPath, Global.cfgFileName);
             Global.txtFilePath = Path.Combine(Global.mainDirPath, Global.txtFileName);
 
-            return true;
+            if (!File.Exists(Global.cfgFilePath))
+            {
+                ret = 0x01;
+                goto LOADTEXT;
+            }
+            string[] cfglines = File.ReadAllLines(@Global.cfgFilePath, Encoding.UTF8);
+            BrushConverter brushConverter = new BrushConverter();
+            foreach (string i in cfglines)
+            {
+                string[] ii = i.Split(new char[] { '=' });
+                if (ii.Length != 2)
+                    continue;
+                switch (ii[0])
+                {
+                    case "window_width":
+                        this.Width = double.Parse(ii[1]);
+                        break;
+                    case "window_height":
+                        this.Height = double.Parse(ii[1]);
+                        break;
+                    case "outer_width":
+                        spdu.outerWidth = double.Parse(ii[1]);
+                        break;
+                    case "outer_opacity":
+                        spdu.outerTransparency = double.Parse(ii[1]);
+                        break;
+                    case "inner_opacity":
+                        spdu.innerTransparency = double.Parse(ii[1]);
+                        break;
+                    case "outer_brush":
+                        
+                        spdu.outerBrush = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "inner_brush":
+                        spdu.innerBrush = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush1":
+                        spdu.brush1 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush2":
+                        spdu.brush2 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush3":
+                        spdu.brush3 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush4":
+                        spdu.brush4 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush5":
+                        spdu.brush5 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    case "brush6":
+                        spdu.brush6 = (Brush)brushConverter.ConvertFromString(ii[1]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+LOADTEXT:
+            if (!File.Exists(Global.txtFilePath))
+            {
+                ret = ret & 0x10;
+                goto EXRET;
+            }
+            using (FileStream stream = File.OpenRead(Global.txtFilePath))
+            {
+                TextRange docTextRange = new TextRange(WhitodoText.Document.ContentStart, WhitodoText.Document.ContentEnd);
+                docTextRange.Load(stream, System.Windows.DataFormats.Rtf);
+            }
+EXRET:
+            return ret;
         }
 
         public void HideControlPanel()
@@ -105,15 +176,36 @@ namespace whitodo_csharp
             */
         }
 
+        
         public void SetSPDU()
         {
-            spdu = new SettingsPDU(TextPanelInnerBackground.Margin.Left - TextPanelOuterBackground.Margin.Left,
-                TextPanelOuterBackground.Opacity, TextPanelInnerBackground.Opacity,
-                TextPanelOuterBackground.Background, TextPanelInnerBackground.Background,
-                RedButton.Background, BlueButton.Background, GreenButton.Background,
-                YellowButton.Background, WhiteButton.Background, BlackButton.Background);
-        }
+            spdu.outerWidth = spdu.outerWidth == -1 ? TextPanelInnerBackground.Margin.Left - TextPanelOuterBackground.Margin.Left : spdu.outerWidth;
+            spdu.outerTransparency = spdu.outerTransparency == -1 ? TextPanelOuterBackground.Opacity : spdu.outerTransparency;
+            spdu.innerTransparency = spdu.innerTransparency == -1 ? TextPanelInnerBackground.Opacity : spdu.innerTransparency;
+            spdu.outerBrush = spdu.outerBrush == null ? TextPanelOuterBackground.Background : spdu.outerBrush;
+            spdu.innerBrush = spdu.innerBrush == null ? TextPanelInnerBackground.Background : spdu.innerBrush;
+            spdu.brush1 = spdu.brush1 == null ? RedButton.Background : spdu.brush1;
+            spdu.brush2 = spdu.brush2 == null ? BlueButton.Background : spdu.brush2;
+            spdu.brush3 = spdu.brush3 == null ? GreenButton.Background : spdu.brush3;
+            spdu.brush4 = spdu.brush4 == null ? YellowButton.Background : spdu.brush4;
+            spdu.brush5 = spdu.brush5 == null ? WhiteButton.Background : spdu.brush5;
+            spdu.brush6 = spdu.brush6 == null ? BlackButton.Background : spdu.brush6;
 
+            TextPanelOuterBackground.Opacity = spdu.outerTransparency;
+            TextPanelInnerBackground.Opacity = spdu.innerTransparency;
+            TextPanelOuterBackground.Background = spdu.outerBrush;
+            TextPanelInnerBackground.Background = spdu.innerBrush;
+            RedButton.Background = spdu.brush1;
+            BlueButton.Background = spdu.brush2;
+            GreenButton.Background = spdu.brush3;
+            YellowButton.Background = spdu.brush4;
+            WhiteButton.Background = spdu.brush5;
+            BlackButton.Background = spdu.brush6;
+
+            spdu.id = 1;
+            DoSettings(spdu);
+        }
+        /*
         public void InitPanelBySPDU()
         {
             for (int i = 1; i < 14; i++)
@@ -122,14 +214,15 @@ namespace whitodo_csharp
                 DoSettings(spdu);
             }
         }
+        */
 
         public MainWindow()
         {
-            InitWhitodo();
             InitializeComponent();
             this.ShowInTaskbar = false;
             FuckNotifyIcon FuckNotify = new FuckNotifyIcon();
             AddNotifyMenu(FuckNotify.GetNotifyIcon());
+            int ret = InitWhitodo();
             SetSPDU();
         }
 
@@ -529,7 +622,6 @@ namespace whitodo_csharp
 
         private void SettingButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SetSPDU();
             SettingDialog settingDialog = new SettingDialog(DoSettings, spdu);
             HideControlPanel();
             settingDialog.ShowDialog();
@@ -540,6 +632,26 @@ namespace whitodo_csharp
         private void WhitodoButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HideControlPanel();
+            string[] cfglines = new string[13];
+            cfglines[0] = "window_width=" + this.Width;
+            cfglines[1] = "window_height=" + this.Height;
+            cfglines[2] = "outer_width=" + spdu.outerWidth;
+            cfglines[3] = "outer_opacity=" + spdu.outerTransparency;
+            cfglines[4] = "inner_opacity=" + spdu.innerTransparency;
+            cfglines[5] = "outer_brush=" + spdu.outerBrush.ToString();
+            cfglines[6] = "inner_brush=" + spdu.innerBrush.ToString();
+            cfglines[7] = "brush1=" + spdu.brush1.ToString();
+            cfglines[8] = "brush2=" + spdu.brush2.ToString();
+            cfglines[9] = "brush3=" + spdu.brush3.ToString();
+            cfglines[10] = "brush4=" + spdu.brush4.ToString();
+            cfglines[11] = "brush5=" + spdu.brush5.ToString();
+            cfglines[12] = "brush6=" + spdu.brush6.ToString();
+            File.WriteAllLines(@Global.cfgFilePath, cfglines, Encoding.UTF8);
+            using (FileStream stream = File.OpenWrite(Global.txtFilePath))
+            {
+                TextRange docTextRange = new TextRange(WhitodoText.Document.ContentStart, WhitodoText.Document.ContentEnd);
+                docTextRange.Save(stream, System.Windows.DataFormats.Rtf);
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -568,7 +680,6 @@ namespace whitodo_csharp
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            double width = 0;
             Thickness margin;
             
             margin = WindowGrid.Margin;
