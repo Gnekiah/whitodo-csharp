@@ -111,6 +111,15 @@ namespace whitodo_csharp
                 YellowButton.Background, WhiteButton.Background, BlackButton.Background);
         }
 
+        public void InitPanelBySPDU()
+        {
+            for (int i = 1; i < 14; i++)
+            {
+                spdu.id = i;
+                DoSettings(spdu);
+            }
+        }
+
         public MainWindow()
         {
             InitWhitodo();
@@ -445,11 +454,59 @@ namespace whitodo_csharp
         
         public void DoSettings(SettingsPDU spdu)
         {
+            double width = 0;
+            Thickness margin;
+
             switch (spdu.id)
             {
                 case 1:
+                    if (TextPanelOuterBackground.Width - 2 * spdu.outerWidth - 40 < 100 ||
+                        TextPanelOuterBackground.Height - 2 * spdu.outerWidth - 40 < 100)
+                        return;
+
+                    margin = TextPanelInnerBackground.Margin;
+                    margin.Top = TextPanelOuterBackground.Margin.Top + spdu.outerWidth;
+                    margin.Left = TextPanelOuterBackground.Margin.Left + spdu.outerWidth;
+                    TextPanelInnerBackground.Margin = margin;
+
+                    width = TextPanelOuterBackground.Width - 2 * spdu.outerWidth;
+                    width = width < 0 ? 0 : width;
+                    TextPanelInnerBackground.Width = width;
+
+                    width = TextPanelOuterBackground.Height - 2 * spdu.outerWidth;
+                    width = width < 0 ? 0 : width;
+                    TextPanelInnerBackground.Height = width;
+
+                    margin = WhitodoText.Margin;
+                    margin.Top = TextPanelInnerBackground.Margin.Top + 20;
+                    margin.Left = TextPanelInnerBackground.Margin.Left + 20;
+                    WhitodoText.Margin = margin;
+
+                    width = TextPanelInnerBackground.Width - 40;
+                    width = width < 0 ? 0 : width;
+                    WhitodoText.Width = width;
+
+                    width = TextPanelInnerBackground.Height - 40;
+                    width = width < 0 ? 0 : width;
+                    WhitodoText.Height = width;
                     break;
                 case 2:
+                    width = spdu.innerWidth + 40 + 2 * spdu.outerWidth;
+                    this.Width = width > 600 ? width : 600;
+                    TextPanelOuterBackground.Width = width;
+                    TextPanelInnerBackground.Width = spdu.innerWidth + 40;
+
+                    margin = TextPanelOuterBackground.Margin;
+                    margin.Left = 0;
+                    TextPanelOuterBackground.Margin = margin;
+
+                    margin = TextPanelInnerBackground.Margin;
+                    margin.Left = TextPanelOuterBackground.Margin.Left + spdu.outerWidth;
+                    TextPanelInnerBackground.Margin = margin;
+
+                    margin = WhitodoText.Margin;
+                    margin.Left = TextPanelInnerBackground.Margin.Left + 20;
+                    WhitodoText.Margin = margin;
                     break;
                 case 3:
                     break;
