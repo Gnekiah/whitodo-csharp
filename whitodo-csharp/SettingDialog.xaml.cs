@@ -59,6 +59,7 @@ namespace whitodo_csharp
         {
             spdu.id = 1;
             OuterWidthValue.Content = OuterWidth.Value;
+            spdu.outerWidth = OuterWidth.Value;
             doSettings.Invoke(spdu);
         }
 
@@ -66,6 +67,7 @@ namespace whitodo_csharp
         {
             spdu.id = 2;
             InnerWidthValue.Content = InnerWidth.Value;
+            spdu.innerWidth = InnerWidth.Value;
             doSettings.Invoke(spdu);
         }    
 
@@ -73,6 +75,7 @@ namespace whitodo_csharp
         {
             spdu.id = 3;
             InnerHeightValue.Content = InnerHeight.Value;
+            spdu.innerHeight = InnerHeight.Value;
             doSettings.Invoke(spdu);
         }
 
@@ -80,6 +83,7 @@ namespace whitodo_csharp
         {
             spdu.id = 4;
             OuterTransparencyValue.Content = OuterTransparency.Value;
+            spdu.outerTransparency = OuterTransparency.Value;
             doSettings.Invoke(spdu);
         }
 
@@ -87,6 +91,7 @@ namespace whitodo_csharp
         {
             spdu.id = 5;
             InnerTransparencyValue.Content = InnerTransparency.Value;
+            spdu.innerTransparency = InnerTransparency.Value;
             doSettings.Invoke(spdu);
         }
     }
