@@ -59,12 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FuckNotifyIcon.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="FuckNotifyIcon.cs" />
     <Compile Include="FuckNotifyIcon.Designer.cs">
       <DependentUpon>FuckNotifyIcon.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingDialog.xaml.cs">
+      <DependentUpon>SettingDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPDU.cs" />
     <Compile Include="Wallpaper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -79,6 +81,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
