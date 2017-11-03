@@ -59,9 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FuckNotifyIcon.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="FuckNotifyIcon.cs" />
     <Compile Include="FuckNotifyIcon.Designer.cs">
       <DependentUpon>FuckNotifyIcon.cs</DependentUpon>
     </Compile>
